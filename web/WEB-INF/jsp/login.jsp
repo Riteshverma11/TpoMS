@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    String ct = application.getContextPath();
+   String ct = application.getContextPath();
 %>
 <jsp:include page="blocks/header.jsp"></jsp:include>
 <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url(<%=ct%>/resources/images/bg_5.jpg);" data-stellar-background-ratio="0.5">

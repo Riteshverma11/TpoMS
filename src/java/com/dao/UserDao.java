@@ -5,9 +5,6 @@ import com.model.User;
 import java.util.ListIterator;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -32,12 +29,27 @@ public class UserDao {
    }
 
    public static boolean register(User user) {
-      Configuration conf = new Configuration().configure();
-      SessionFactory sf = conf.buildSessionFactory();
-      Session s = sf.openSession();
+      Session s = HBConnection.getSession();
       s.save(user);
       s.beginTransaction().commit();
       s.close();
       return true;
+   }
+
+   public static User verify(User user) {
+      Session s = HBConnection.getSession();
+      String sql = "update User set verified = 1 where email=:em";
+      Query q = s.createQuery(sql);
+      q.setString("em", user.getEmail());
+
+      if (q.executeUpdate() > 0) {
+         s.beginTransaction().commit();
+      }
+
+      sql = "from User where email=:email";
+      Query qu = s.createQuery(sql);
+      qu.setString("email", user.getEmail());
+      User u = (User) qu.uniqueResult();
+      return u;
    }
 }

@@ -3,11 +3,14 @@ package com.controller;
 import com.dao.UserDao;
 import com.model.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/user/")
@@ -34,8 +37,6 @@ public class UserController {
    public String profile(User user, HttpSession session) {
       System.out.println(user.getEmail());
       if (user.getEmail() != null) {
-         System.out.println("Hello");
-
          if (!user.getEmail().equals("") && !user.getPassword().equals("")) {
             User refUser = UserDao.login(user);
             session.setAttribute("user", refUser);
@@ -53,6 +54,32 @@ public class UserController {
          }
       }
       return "login";
+   }
+
+   @RequestMapping(value = "verify", method = RequestMethod.POST)
+   public void verifyUser(HttpSession session, @RequestParam(value = "enteredOtp") String enteredOtp, HttpServletRequest request, HttpServletResponse response) {
+      try {
+         PrintWriter out = response.getWriter();
+         String generatedOtp = (String) session.getAttribute("otp");
+         if (enteredOtp.equals(generatedOtp)) {
+            User user = (User) session.getAttribute("user");
+            User u = UserDao.verify(user);
+            if (u.getType() == 1) {
+               out.print("Admin");
+            } else if (u.getType() == 2) {
+               out.print("Faculty");
+            } else if (u.getType() == 3) {
+               out.print("Student");
+            } else {
+               out.print("");
+            }
+            session.setAttribute("user", u);
+         } else {
+            out.print("Invalid OTP.");
+         }
+      } catch (IOException e) {
+         System.out.println("Email Verification Exception : " + e.toString());
+      }
    }
 
    @RequestMapping(value = "logout")

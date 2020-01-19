@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+   @Entity
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -28,7 +28,7 @@ public class User implements Serializable {
    @Column(nullable = false)
    private String password;
 
-   @Column(nullable = false)
+   @Column(nullable = false, columnDefinition = "TINYINT(1) DEFAULT 3")
    private int type = 3;
 
    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
