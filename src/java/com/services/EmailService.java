@@ -1,4 +1,4 @@
- package com.servieces;
+ package com.services;
 
 import java.util.Properties;
 import javax.mail.Message;

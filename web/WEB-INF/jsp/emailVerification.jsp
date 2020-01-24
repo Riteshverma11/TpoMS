@@ -4,7 +4,7 @@
     Author     : Ritesh Verma
 --%>
 
-<%@page import="com.servieces.EmailService"%>
+<%@page import="com.services.EmailService"%>
 <%@page import="com.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -50,8 +50,6 @@
       object.onreadystatechange = function () {
          if (object.readyState === 4) {
             var res = object.responseText;
-            err.innerHTML = res;
-//            alert(res);
             if (res === "Admin") {
                window.location.href = "/TpoMS/admin/dashboard";
             } else if (res === "Faculty") {

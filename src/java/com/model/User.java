@@ -1,14 +1,17 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-   @Entity
+@Entity
 @Table(name = "user")
 public class User implements Serializable {
 
@@ -21,7 +24,7 @@ public class User implements Serializable {
 
    @Column(nullable = false, unique = true)
    private String email;
-   
+
    @Column(nullable = false, unique = true)
    private String mobile;
 
@@ -33,6 +36,9 @@ public class User implements Serializable {
 
    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
    private boolean verified;
+
+   @OneToMany(mappedBy = "user")
+   private List<Question> question;
 
    public User() {
    }
@@ -101,8 +107,16 @@ public class User implements Serializable {
       this.verified = verified;
    }
 
+   public List<Question> getQuestion() {
+      return question;
+   }
+
+   public void setQuestion(List<Question> question) {
+      this.question = question;
+   }
+
    @Override
    public String toString() {
-      return "User{" + "userId=" + userId + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", password=" + password + ", type=" + type + ", verified=" + verified + '}';
+      return "User{" + "userId=" + userId + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", password=" + password + ", type=" + type + ", verified=" + verified + ", question=" + question + '}';
    }
 }

@@ -18,7 +18,7 @@ public class UserController {
 
 //   For Register
    @RequestMapping(value = "register")
-   public String login(User user, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws IOException {
+   public String register(User user, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws IOException {
       if (user.getName() != null) {
          if (!user.getName().equals("")) {
             boolean isRegistered = UserDao.register(user);
@@ -34,7 +34,7 @@ public class UserController {
 
 //   For Login
    @RequestMapping(value = "login")
-   public String profile(User user, HttpSession session) {
+   public String login(User user, HttpSession session) {
       System.out.println(user.getEmail());
       if (user.getEmail() != null) {
          if (!user.getEmail().equals("") && !user.getPassword().equals("")) {
@@ -56,6 +56,7 @@ public class UserController {
       return "login";
    }
 
+//   For Email Verification With Otp
    @RequestMapping(value = "verify", method = RequestMethod.POST)
    public void verifyUser(HttpSession session, @RequestParam(value = "enteredOtp") String enteredOtp, HttpServletRequest request, HttpServletResponse response) {
       try {
@@ -71,11 +72,11 @@ public class UserController {
             } else if (u.getType() == 3) {
                out.print("Student");
             } else {
-               out.print("");
+               out.print("Err");
             }
             session.setAttribute("user", u);
          } else {
-            out.print("Invalid OTP.");
+            out.print("Err");
          }
       } catch (IOException e) {
          System.out.println("Email Verification Exception : " + e.toString());

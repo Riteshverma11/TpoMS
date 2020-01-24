@@ -4,7 +4,7 @@
     Author     : root
 --%>
 <%
-  String ct = application.getContextPath();
+   String ct = application.getContextPath();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -93,11 +93,8 @@
   </div>
 </footer>
 
-
-
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
 
 <script src="<%=ct%>/resources/js/jquery.min.js"></script>
 <script src="<%=ct%>/resources/js/jquery-migrate-3.0.1.min.js"></script>
@@ -114,6 +111,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 <script src="<%=ct%>/resources/js/google-map.js"></script>
 <script src="<%=ct%>/resources/js/main.js"></script>
-
+<script src="<%=ct%>/resources/js/verify-otp.js"></script>
 </body>
 </html>

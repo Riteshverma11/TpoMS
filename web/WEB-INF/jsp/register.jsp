@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    String ct = application.getContextPath();
+   String ct = application.getContextPath();
 %>
 <jsp:include page="blocks/header.jsp"></jsp:include>
 <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" style="background-image: url(<%=ct%>/resources/images/bg_5.jpg);" data-stellar-background-ratio="0.5">
@@ -39,6 +39,20 @@
             <div class="d-md-flex">
               <div class="form-group ml-md-4">
                 <input type="password" name="password" class="form-control" placeholder="Password">
+              </div>
+            </div>
+            <div class="d-md-flex">
+              <div class="form-group ml-md-4">
+                <div class="form-field">
+                  <div class="select-wrap">
+                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                    <select name="type" required="" class="form-control">
+                      <option value="" selected="">Register As</option>
+                      <option value="2">Faculty</option>
+                      <option value="3">Student</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="d-md-flex">

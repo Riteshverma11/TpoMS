@@ -1,4 +1,4 @@
-package com.servieces;
+package com.services;
 
 public class Constants {
 
